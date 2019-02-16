@@ -1,0 +1,22 @@
+{
+  "name": "hackathon",
+  "version": "0.1.0",
+  "description": "Hackathon project for ETHDenver hackathon",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/our-channel/hackathon.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/our-channel/hackathon/issues"
+  },
+  "homepage": "https://github.com/our-channel/hackathon#readme",
+  "devDependencies": {
+    "lerna": "^3.4.3"
+  }
+}
