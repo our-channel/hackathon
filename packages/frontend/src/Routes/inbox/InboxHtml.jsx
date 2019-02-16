@@ -1,6 +1,8 @@
 import React from "react";
 
 export const InboxHtml = ({ parent }) => {
+  console.log('parent.state:')
+  console.log(parent.state)
   return (
     <div className="col-md py-3 tab-content">
       <div id="messages" className="tab-pane active">
@@ -96,9 +98,9 @@ export const InboxHtml = ({ parent }) => {
                         >
                           <a
                             title="send mail"
-                            href={"mailto:" + item.fromAddress}
+                            href={"mailto:" + item.address}
                           >
-                            {item.from}{" "}
+                            {item.address}{" "}
                             <span className="icon icon-envelope far fa-fw fa-envelope mr-md-1" />
                           </a>
                         </label>
@@ -124,7 +126,7 @@ export const InboxHtml = ({ parent }) => {
                             (!item.read ? "font-weight-bold" : "")
                           }
                         >
-                          {item.dtSent}
+                          {item.time}
                         </span>
                       </div>
                       <p className="lead mb-0">
@@ -164,7 +166,7 @@ export const InboxHtml = ({ parent }) => {
             ? parent.state.deleted.map((item, idx) => (
                 <div className="col-12" key={idx}>
                   <a href>
-                    {item.from} ({item.fromAddress})
+                    {item.address} ({item.address})
                     <span className="px-2">
                       {item.subject.substring(0, 20)}...
                     </span>

@@ -16,6 +16,8 @@ const loadRequest = (state=INIT) => {
 }
 
 const loadSuccess = (state=INIT, action) => {
+  console.log('loadSuccess');
+  console.log(action)
   return {
     ...state,
     loading: false,
@@ -34,7 +36,7 @@ const loadFail = (state=INIT, action) => {
 const HANDLERS = {
   [Types.LOAD_REQUEST]: loadRequest,
   [Types.LOAD_SUCCESS]: loadSuccess,
-  [Types.LOAD_FAILURE]: loadFail
+  [Types.LOAD_FAILURE]: loadFail,
 }
 
 export default createReducer(INIT, HANDLERS);
