@@ -1,0 +1,9 @@
+.composer {
+
+  .error {
+    text-align: center;
+    color: $danger;
+    font-size: 1.4em;
+    background: theme-color("error-bg");
+  }
+}
