@@ -1,3 +1,4 @@
+import KeyManager from 'Services/KeyManager';
 
 const ABI = [
 	{
@@ -172,7 +173,8 @@ export default class IDContractService {
 		this.from = props.account;
 
     [
-      'sendMessage'
+      'sendMessage',
+			'getEncryptionKey'
     ].forEach(fn=>{
       this[fn] = this[fn].bind(this);
     });
@@ -203,4 +205,13 @@ export default class IDContractService {
 						})
 		});
   }
+
+	getEncryptionKey() {
+
+		if(!this.encKey) {
+			//TODO: go out to chain if not already done
+			this.encKey = KeyManager.instance.publicEncryptionKey;
+		}
+		return this.encKey;
+	}
 }
