@@ -2,14 +2,18 @@ import {connect} from 'react-redux';
 import Inbox from './Inbox';
 
 const s2p = state => {
-  return {
+  console.log('s2p')
+  console.log('state.inbox:')
+  console.log(state.inbox)
 
+  return {
+    messages: state.inbox.messages
   }
 }
 
 const d2p = dispatch => {
   return {
-
+    
   }
 }
 

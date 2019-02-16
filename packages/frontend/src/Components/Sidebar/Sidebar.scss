@@ -42,7 +42,6 @@
     }
   }
 
-
   .nav-item {
     padding: 15px 5px;
 
@@ -66,7 +65,6 @@
   }
 
 }
-
 
 .sidebar.save {
   @each $breakpoint in map-keys($grid-breakpoints) {
