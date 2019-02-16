@@ -45,7 +45,6 @@ export default class Sidebar extends React.Component {
       <div className={navClasses}>
         <div >
           <Nav vertical className="flex-column">
-
             {
               menuItems.map((m,i)=>{
                 const {
@@ -64,14 +63,12 @@ export default class Sidebar extends React.Component {
                 if(iconImage) {
                   return (
                     <NavItem key={i} className={classnames({active: active})}>
-
                       <NavLink to={url} >
                         <div className={classes}>
                           <img className="img-icon d-inline" alt={id} src={iconImage} />
                           <span className="nav-item-label">{label}</span>
                         </div>
                       </NavLink>
-
                     </NavItem>
                   )
                 } else {
@@ -89,12 +86,6 @@ export default class Sidebar extends React.Component {
 
               })
             }
-
-
-
-
-
-
           </Nav>
       </div>
     </div>
