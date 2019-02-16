@@ -4,6 +4,7 @@ export const InboxHtml = ({ parent }) => {
   console.log('parent.state:')
   console.log(parent.state)
   return (
+
     <div className="col-md py-3 tab-content">
       <div id="messages" className="tab-pane active">
         <div className="d-flex flex-sm-row flex-column py-1 mb-1">

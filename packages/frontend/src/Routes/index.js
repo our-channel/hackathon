@@ -33,7 +33,7 @@ class MainApp extends Component {
           <Col md="1" className="d-flex flex-column justify-content-center align-items-start">
             <Sidebar />
           </Col>
-          <Col md="11">
+          <Col md="11" >
             <Switch>
               <Route path={`${match.url}/inbox`} component={inbox} />
               <Route path={`${match.url}/contacts`} component={contacts} />

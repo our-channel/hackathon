@@ -27,7 +27,7 @@ export class Inbox extends Component {
 
   renderMessage = () => {
     return this.state.showMessage ? (
-      <ModalMessage message={this.state.selected} 
+      <ModalMessage message={this.state.selected}
       modal={this.state.showMessage}
       toggle={this.toggleMessageView}/>
     ) : null;

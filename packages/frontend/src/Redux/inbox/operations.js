@@ -172,18 +172,12 @@ const init = () => async dispatch => {
   dispatch(Creators.loadSuccess(messages));
 }
 
-
-const incomingMessage = (message) => async (dispatch,getState) => {
-  let state = getState();
-  console.log("STATE", state);
-  
-  let web3 = state.web3.web3;
-  let idContract = state.web3.idContract;
-  let contractAddress = state.keymanager.didAddress;
-  console.log("My Id contract", contractAddress);
-  await idContract.sendMessage(contractAddress, "0x8976564");
+const incomingMessages = (messages) => (dispatch) => {
+  dispatch(Creators.incomingMessages(messages));
 }
 
+
 export default {
-  init
+  init,
+  incomingMessages
 }
