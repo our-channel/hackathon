@@ -1,0 +1,68 @@
+@import 'react-redux-toastr/src/styles/index';
+@import "variables";
+@import "../Components/Topbar/TopNav";
+@import "../Components/Sidebar/Sidebar";
+@import "../Routes/inbox/Inbox";
+
+.w-40 {
+  width: 40%;
+}
+.w-45 {
+  width: 45%;
+}
+
+.w-55 {
+  width: 55%;
+}
+
+.w-60 {
+  width: 60%;
+}
+
+.w-65 {
+  width: 65%;
+}
+
+.w-70 {
+  width: 70%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-85 {
+  width: 85%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.error-box {
+  padding: 10px;
+  background: $warning;
+  border: 1px solid $danger;
+  color: $danger;
+  font-weight: bold;
+  text-align: center;
+
+  .error-text {
+    font-size: 1.2em;
+  }
+}
+.smart-contract-icon {
+  background-image: url("/img/smart_contract_icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  width: 20px;
+}

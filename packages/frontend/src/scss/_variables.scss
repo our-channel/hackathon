@@ -1,0 +1,41 @@
+// Variable overrides
+@import "node_modules/bootstrap/scss/bootstrap";
+
+$nav-margin-md: 130px;
+$nav-margin-sm: 100px;
+
+$theme-colors: (
+  "graph-tt-bg": #e5eff5,
+  "graph-fg-good": rgb(80, 160, 230),
+  "nav-bg-color": #1E6FC1,
+  "nav-text": rgba(255,255,255, .9),
+  "nav-text-hover": #FFB03F,
+  "nav-dark-text": rgba(0, 0, 0, .9),
+  "context-bar-bg": rgba(255,255,255, 1),
+  "sidebar-bg": rgba(255,255,255, .9),
+  "buidl-logo-text-highlight": #FFB03F,
+  "buidl-logo-text-normal": #FFFFFF,
+  "shadow-light": rgba(255,255,255,.5),
+  "shadow-dark": rgba(0, 0, 0, .3),
+  "shadow-slight": rgba(0, 0, 0, .1),
+  "text-dark": rgba(0, 0, 0, .8),
+  "text-light": rgba(255, 255, 255, .9),
+  "text-light-highlight": cyan,
+  "text-dark-mild": rgba(0, 0, 0, .5),
+  "text-dark-subtle": rgba(100, 100, 100, .5),
+  "text-muted": rgba(0, 0, 0, .3),
+  "text-highlight": #FFB03F,
+  "dark-border": rgba(0, 0, 0, .5),
+  "signup-header": #589DD6,
+  "light-background": rgba(255,255,255,.8),
+  "modal-dark-background": rgba(30, 111, 209, 1),
+  "modal-info-header": #78BDF6,
+  "error-bg": rgba(255, 208, 63, .4),
+  "good-metric": $success,
+  "warn-metric": $warning,
+  "bad-metric": $danger,
+  "badge-text": $danger,
+  "services-block-title": rgba(98, 167, 206, 1),
+  "dark-bg": rgba(0, 0, 0, .7),
+  "canvas-bg": rgba(255, 255, 255, .7)
+)
