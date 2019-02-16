@@ -10,6 +10,7 @@ import 'font-awesome/css/font-awesome.min.css';
 // Import Simple Line Icons Set
 import 'simple-line-icons/css/simple-line-icons.css';
 import "react-table/react-table.css";
+import 'react-quill/dist/quill.snow.css';
 
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
@@ -26,10 +27,9 @@ if (location.pathname === '/'  || location.pathname==='/landing'|| location.path
 */
 
 class App extends Component {
-  
-  render() {
-    console.log("Default start", defaultStartPath);
 
+  render() {
+    
     const { location, match } = this.props;
     if (location.pathname === '/') {
       return (<Redirect to={defaultStartPath} />);

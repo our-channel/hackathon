@@ -4,7 +4,9 @@ import {Types} from './actions';
 const INIT = {
   didAddress: null,
   loading: false,
-  error: null
+  error: null,
+  modalShowing: false,
+  sendTxnHashes: []
 }
 
 const createIdRequest = (state=INIT) => {
@@ -31,10 +33,50 @@ const createIdFail = (state=INIT, action) => {
   }
 }
 
+const toggleModal = (state=INIT) => {
+  return {
+    ...state,
+    modalShowing: !state.modalShowing
+  }
+}
+
+const send = (state=INIT) => {
+  return {
+    ...state,
+    loading: true
+  }
+}
+
+const sendOk = (state=INIT, action) => {
+  let hashes = [
+    ...state.sendTxnHashes,
+    action.hash
+  ];
+  return {
+    ...state,
+    loading: false,
+    sendTxnHashes: hashes,
+    modalShowing: false
+  }
+}
+
+const sendFail = (state=INIT, action) => {
+  return {
+    ...state,
+    loading: false,
+    error: action.error
+  }
+}
+
 const HANDLERS = {
   [Types.CREATE_ID_REQUEST]: createIdRequest,
   [Types.CREATE_ID_SUCCESS]: createIdSuccess,
-  [Types.CREATE_ID_FAILURE]: createIdFail
+  [Types.CREATE_ID_FAILURE]: createIdFail,
+
+  [Types.TOGGLE_MODAL]: toggleModal,
+  [Types.SEND_STARTED]: send,
+  [Types.SEND_COMPLETED]: sendOk,
+  [Types.SEND_FAILURE]: sendFail
 }
 
 export default createReducer(INIT, HANDLERS);

@@ -55,6 +55,13 @@
       box-shadow: -5px 0 0 theme-color("nav-text-hover") inset;
       color: theme-color("nav-dark-text");
     }
+
+    &.nohover {
+      &:hover {
+        background: transparent;
+        box-shadow: none;
+      }
+    }
   }
 
 }

@@ -178,18 +178,29 @@ export default class IDContractService {
     });
   }
 
-  async sendMessage(senderChannel, ipfsUrl) {
-		console.log("This from address", this.from);
-
-    //TODO: sign the freaking ipfsUrl
-    await this.contract.methods.AddMessage(senderChannel, ipfsUrl, 1, this.web3.utils.fromAscii("0x100"), this.web3.utils.fromAscii("0x200"))
-          .send({
-						from: this.from
-					}).then(r=>{
-            console.log("Add message result", r);
-          })
-          .catch(e=>{
-            console.log("ERROR", e);
-          });
+  sendMessage(senderChannel, ipfsUrl) {
+		//TODO: sign the freaking ipfsUrl
+		return new Promise((done,err)=>{
+			let txnHash = [];
+			this.contract.methods.AddMessage(senderChannel, ipfsUrl, 1, this.web3.utils.fromAscii("0x100"), this.web3.utils.fromAscii("0x200"))
+	          .send({
+							from: this.from
+						})
+						.on('transactionHash', hash => {
+							console.log("Hash", hash);
+							txnHash.push(hash);
+						})
+						.on('confirmation', (confirmationNumber) => {
+				      if (confirmationNumber === 1) {
+				        done(txnHash[0])
+				      }
+				    })
+				    .on('error', (error) => {
+				      err(error)
+				    })
+						.catch(e=>{
+							err(e);
+						})
+		});
   }
 }

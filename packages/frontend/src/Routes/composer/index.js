@@ -4,9 +4,9 @@ import {default as ops} from 'Redux/composer/operations';
 
 const s2p = state => {
   return {
-    web3: state.web3.web3,
-    idContract: state.web3.idContract,
-    idFactory: state.web3.idFactory
+    showing: state.composer.modalShowing,
+    loading: state.composer.loading,
+    error: state.composer.error
   }
 }
 
@@ -16,8 +16,14 @@ const d2p = (dispatch) => {
     createID: () => {
       return dispatch(ops.createId())
     },
-    sendMessage: () => {
-      return dispatch(ops.sendMessage("ipfsURLEventually"))
+    sendMessage: (to, msg) => {
+      return dispatch(ops.sendMessage(to, msg));
+    },
+    showComposer: () => {
+      dispatch(ops.toggleModal())
+    },
+    cancel: () => {
+      dispatch(ops.toggleModal())
     }
   }
 }

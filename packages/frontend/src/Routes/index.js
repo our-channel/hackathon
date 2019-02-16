@@ -7,7 +7,7 @@ import Sidebar from 'Components/Sidebar';
 
 import inbox from './inbox';
 import contacts from './contacts';
-import composer from './composer';
+import Composer from './composer';
 
 import {default as initOps} from 'Redux/init/operations';
 
@@ -27,15 +27,16 @@ class MainApp extends Component {
     return (
       <div className="app-container container-fluid mr-0 ml-0 pr-0 pl-0">
         <Topbar />
+        <Composer />
+
         <Row className="no-gutters w-100">
           <Col md="1" className="d-flex flex-column justify-content-center align-items-start">
             <Sidebar />
           </Col>
-          <Col>
+          <Col md="11">
             <Switch>
               <Route path={`${match.url}/inbox`} component={inbox} />
               <Route path={`${match.url}/contacts`} component={contacts} />
-              <Route path={`${match.url}/compose`} component={composer} />
               <Redirect to="/error" />
             </Switch>
           </Col>
