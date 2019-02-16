@@ -44,7 +44,14 @@ export default class Composer extends React.Component {
       body: this.state.body,
       timestamp: Date.now()
     }
-    this.props.sendMessage(this.state.to, msg);
+    this.props.sendMessage(this.state.to, msg)
+    .then(()=>{
+      this.setState({
+        to: "",
+        subject: "",
+        body: ""
+      });
+    });
   }
 
   render() {
