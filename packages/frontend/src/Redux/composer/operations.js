@@ -2,7 +2,6 @@ import {Creators} from './actions';
 import RelayContract from 'Services/IDFactoryService';
 import IDContract from 'Services/IDContractService';
 import MsgIO from 'Services/MessageIO';
-import KeyManager from 'Services/KeyManager';
 
 const sendMessage = (to, msg) => async (dispatch,getState) => {
   let state = getState();
