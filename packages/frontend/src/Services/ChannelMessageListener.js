@@ -36,6 +36,14 @@ export default class ChannelMessageListener {
   }
 
   async _doPoll() {
+    // var events = await axios.post(
+    //   "https://api.thegraph.com/subgraphs/name/realdave/testevents",
+    //   {
+    //     query: "query($targetAddress: String!) { relayedMessages(targetAddress: $targetAddress) { id targetAddress sender ipfsAddress } }",
+    //     variables: { "targetAddress": this.contractAddress },
+    //   }
+    // );
+
     //TODO: actually pull messages from graphQL or whatever endpoint
     let msg = new Message({
       id: uuid(),
