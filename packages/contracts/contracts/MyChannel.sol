@@ -12,7 +12,7 @@ contract MyChannel {
 
     /* event WalletVerified(address indexed _verifiedBy, address walletAddress); */
 
-    event MessageReceived(address sender , bytes ipfs_address);
+    event MessageReceived(address sender , string ipfs_address);
 
     constructor() public{
         /* verified   = false;
@@ -67,7 +67,7 @@ contract MyChannel {
         publicKey = contactWhitelist[contact];
     }
 
-    function AddMessage (address senderChannelAddress, bytes memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+    function AddMessage (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
         /* address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
 
         emit MessageReceived(senderChannelAddress, ipfsAddress );
