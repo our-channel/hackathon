@@ -13,11 +13,11 @@ const init = () => async (dispatch,getState)=> {
   if(inboxOps.init) {
     calls.push(dispatch(inboxOps.init()));
   }
-  if(keyOps.init) {
-    calls.push(dispatch(keyOps.init()));
-  }
   if(web3Ops.init) {
     calls.push(dispatch(web3Ops.init()));
+  }
+  if(keyOps.init) {
+    calls.push(dispatch(keyOps.init()));
   }
   await Promise.all(calls);
   dispatch(Creators.initComplete());

@@ -22,5 +22,4 @@ contract UserRegistry {
     function GetAddressByName (string memory userName) public view returns(address userAddress) {
         userAddress = addressesbyUser[userName];
     }
-
 }

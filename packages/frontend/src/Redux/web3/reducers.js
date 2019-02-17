@@ -7,7 +7,8 @@ const INIT = {
   web3: null,
   account: null,
   idFactory: null,
-  idContract: null
+  idContract: null,
+  userRegistry: null
 }
 
 const initRequest = (state=INIT) => {
@@ -25,6 +26,7 @@ const initSuccess = (state=INIT, action) => {
     web3: action.web3,
     idFactory: action.idFactory,
     idContract: action.idContract,
+    userRegistry: action.userRegistry,
     account: action.account
   }
 }

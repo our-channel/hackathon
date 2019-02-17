@@ -2,6 +2,7 @@ import {Creators} from './actions';
 import Web3 from 'web3';
 import IDContractService from 'Services/IDContractService'
 import IDFactoryService from 'Services/IDFactoryService';
+import UserRegistryService from 'Services/UserRegistryService';
 
 const init = () => async (dispatch,getState) => {
   let state = getState();
@@ -9,6 +10,7 @@ const init = () => async (dispatch,getState) => {
 
   let idFactory = null;
   let idContract = null;
+  let userRegistry = null;
   let account = null;
 
   dispatch(Creators.initRequest());
@@ -23,10 +25,15 @@ const init = () => async (dispatch,getState) => {
        account,
        contractAddress
      });
+     userRegistry = new UserRegistryService({
+       web3,
+       account,
+       contractAddress: "0xbea9c7ab291a4252c9f259ddeb57657469cc6e84"
+     });
 
   }
 
-  dispatch(Creators.initSuccess(web3, account, idFactory, idContract));
+  dispatch(Creators.initSuccess(web3, account, idFactory, idContract, userRegistry));
 }
 
 export default {

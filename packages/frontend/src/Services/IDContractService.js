@@ -4,6 +4,57 @@ const ABI = [
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "verificationInfo",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "ipfs_address",
+				"type": "string"
+			}
+		],
+		"name": "MessageReceived",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "SetOwner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
 		"name": "GetOwner",
 		"outputs": [
 			{
@@ -19,14 +70,28 @@ const ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_owner",
-				"type": "address"
+				"name": "_publicKey",
+				"type": "string"
 			}
 		],
-		"name": "SetOwner",
+		"name": "SetPublicKey",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetPublicKey",
+		"outputs": [
+			{
+				"name": "publicKey",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -75,7 +140,7 @@ const ABI = [
 			},
 			{
 				"name": "ipfsAddress",
-				"type": "bytes"
+				"type": "string"
 			},
 			{
 				"name": "v",
@@ -94,20 +159,6 @@ const ABI = [
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "verificationInfo",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -140,29 +191,6 @@ const ABI = [
 		"payable": false,
 		"stateMutability": "pure",
 		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "sender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "ipfs_address",
-				"type": "bytes"
-			}
-		],
-		"name": "MessageReceived",
-		"type": "event"
 	}
 ];
 
@@ -180,11 +208,12 @@ export default class IDContractService {
     });
   }
 
-  sendMessage(senderChannel, ipfsUrl) {
-		//TODO: sign the freaking ipfsUrl
+  sendMessage(senderChannel, ipfsUrl, sig) {
+
 		return new Promise((done,err)=>{
 			let txnHash = [];
-			this.contract.methods.AddMessage(senderChannel, ipfsUrl, 1, this.web3.utils.fromAscii("0x100"), this.web3.utils.fromAscii("0x200"))
+			let fromAscii = this.web3.utils.fromAscii;
+			this.contract.methods.AddMessage(senderChannel, ipfsUrl, sig.v, sig.r, sig.s)
 	          .send({
 							from: this.from
 						})

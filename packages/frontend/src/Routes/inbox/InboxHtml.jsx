@@ -1,9 +1,6 @@
 import React from "react";
 
 export const InboxHtml = ({ parent, messages }) => {
-  console.log('re-rendering html')
-  console.log('messages:')
-  console.log(messages)
   return (
     <div >
       <ul className="list-group py-2">
@@ -19,10 +16,10 @@ export const InboxHtml = ({ parent, messages }) => {
                       >
                         <a
                           title="send mail"
-                          href={"mailto:" + item.address}
+                          href={"mailto:" + item.sender}
                           className="sender-address"
                         >
-                          {item.address}{" "}
+                          {item.sender}{" "}
                           <span className="icon icon-envelope far fa-fw fa-envelope mr-md-1" />
                         </a>
                       </label>

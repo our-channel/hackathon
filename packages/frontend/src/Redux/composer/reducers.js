@@ -12,6 +12,8 @@ const INIT = {
 const toggleModal = (state=INIT) => {
   return {
     ...state,
+    error: null,
+    loading: false,
     modalShowing: !state.modalShowing
   }
 }
