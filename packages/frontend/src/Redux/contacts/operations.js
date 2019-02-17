@@ -16,6 +16,8 @@ const search = (userOrAddr) => async (dispatch,getState) => {
     dispatch(Creators.searchStart());
     let r = await registry.search(userOrAddr);
     let ua = r.userAddress;
+    console.log("UA", ua);
+    
     if(ua && ua === ZERO_ADDRESS) {
       ua = [];
     } else {
