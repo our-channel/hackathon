@@ -8,11 +8,11 @@ contract MyChannel {
 
     string pubicKey;
 
-    mapping (address => bytes) contactWhitelist; // contact_address to contact_publickey
+    mapping (address => string) contactWhitelist; // contact_address to contact_publickey
 
     /* event WalletVerified(address indexed _verifiedBy, address walletAddress); */
 
-    event MessageReceived(address sender , bytes ipfs_address);
+    event MessageReceived(address sender , string ipfs_address);
 
     constructor() public{
         /* verified   = false;
@@ -59,15 +59,15 @@ contract MyChannel {
         return verified;
     } */
 
-    function AddContactToWhitelist (address contactChannelAddress, bytes memory publickey) public {
+    function AddContactToWhitelist (address contactChannelAddress, string memory publickey) public {
         contactWhitelist[contactChannelAddress] = publickey;
     }
 
-    function GetContactPublicKey (address contact) public view returns(bytes memory publicKey) {
+    function GetContactPublicKey (address contact) public view returns(string memory publicKey) {
         publicKey = contactWhitelist[contact];
     }
 
-    function AddMessage (address senderChannelAddress, bytes memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+    function AddMessage (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
         /* address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
 
         emit MessageReceived(senderChannelAddress, ipfsAddress );

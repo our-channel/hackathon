@@ -10,7 +10,7 @@ contract MyChannelFactory {
     Holder[] holderList;
 
     event ChannelCreated(address holderAddress, address channelContractAddress, string publicKey);
-    event MessageRelayed(address targetAddress, address sender , bytes ipfs_address);
+    event MessageRelayed(address targetAddress, address sender , string ipfs_address);
 
     function createChannel(address user, string memory publicKey) public returns(address)
     {
@@ -39,7 +39,7 @@ contract MyChannelFactory {
         channelContractAddress = holder.channelContractAddress;
     }
 
-    function RelayMessage(address targetContractAddress, address senderChannelAddress, bytes memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+    function RelayMessage(address targetContractAddress, address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
         MyChannel targetInstance = MyChannel(targetContractAddress);
         targetInstance.AddMessage(senderChannelAddress, ipfsAddress, v,  r, s);
 
