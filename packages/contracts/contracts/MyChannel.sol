@@ -65,7 +65,7 @@ contract MyChannel {
         return contactWhitelistArray;
     }
 
-    function AddMessage (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+    function AddMessageEx (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
 
         /*address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
         emit MessageReceived(senderChannelAddress, ipfsAddress );
@@ -81,25 +81,23 @@ contract MyChannel {
 
     }
 
-    function AddMessageEx(address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+    function AddMessage(address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
 
-        bytes memory _ipfsAddress;
-        address senderPublicKey = this.recoverPublicKey(_ipfsAddress,v,r,s);
-        /* this.AddLogMessage(); */
+
+        address signerAddress = this.recoverPublicKey(ipfsAddress,v,r,s);
+
+        MyChannel channelInstance =  MyChannel(senderChannelAddress);
+        address senderChannelOwner = channelInstance.GetOwner();
+
+
+        require(senderChannelOwner == signerAddress);
+
+        // if sender is the owner of the contract no whitelist check, otherwise should be in whitelist
+        require (senderChannelOwner == this.owner) || (contactWhitelistMap[senderChannelOwner]);
         emit MessageReceived(senderChannelAddress, ipfsAddress );
-
-        /* if ( require(senderPublicKey == contactWhitelist[senderChannelAddress]))
-            emit MessageReceived(senderChannelAddress, ipfsAddress );
-        else
-            emit MessageReceived(senderChannelAddress, 0 );         */
-
-
-        /* require(senderPublicKey == contactWhitelist[senderChannelAddress]); */
-        /* emit MessageReceived(senderChannelAddress, ipfsAddress ) */
-
     }
 
-    function recoverPublicKey(bytes calldata ipfsAddress, uint8 v, bytes32 r, bytes32 s) external pure returns (address sender) {
+    function recoverPublicKey(string calldata ipfsAddress, uint8 v, bytes32 r, bytes32 s) external pure returns (address sender) {
             bytes32 msgHash = keccak256(abi.encodePacked(ipfsAddress));
             return ecrecover(msgHash, v, r, s);
     }
