@@ -80,6 +80,10 @@ export default class ChannelMessageListener {
 
        let ipfsAddress = evt.ipfsAddress;
        let msg = await MsgIO.instance.decodeIncoming(ipfsAddress, idContract);
+       msg = {
+         ...msg,
+         sender: sender
+       }
        await this.dispatch(this.handler(msg));
 
      });

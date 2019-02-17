@@ -16,9 +16,9 @@ export const InboxHtml = ({ parent, messages }) => {
                       >
                         <a
                           title="send mail"
-                          href={"mailto:" + item.address}
+                          href={"mailto:" + item.sender}
                         >
-                          {item.address}{" "}
+                          {item.sender}{" "}
                           <span className="icon icon-envelope far fa-fw fa-envelope mr-md-1" />
                         </a>
                       </label>

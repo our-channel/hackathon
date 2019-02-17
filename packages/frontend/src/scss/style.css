@@ -18165,6 +18165,21 @@ html:not([dir="rtl"]) .sidebar {
 .subject-text {
   color: #330066; }
 
+.contact .send {
+  font-size: 1.5em; }
+  .contact .send:hover {
+    cursor: pointer;
+    font-size: 1.7em; }
+
+.contact .copy {
+  font-size: 1em; }
+  .contact .copy:hover {
+    cursor: pointer;
+    font-size: 1.1em; }
+
+.contacts .header-text {
+  font-size: 2em; }
+
 .w-40 {
   width: 40%; }
 

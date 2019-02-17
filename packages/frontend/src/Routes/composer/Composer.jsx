@@ -52,6 +52,18 @@ export default class Composer extends React.Component {
   }
 
   render() {
+    /*
+    <div className="col-sm-auto py-1">
+      <button
+        type="button"
+        onClick={()=>this.props.createID()}
+        className="btn btn-outline-secondary btn-block"
+      >
+        Create ID
+      </button>
+    </div>
+    */
+    
     const {showing, loading, error} = this.props;
     const {to, subj, body} = this.state;
 
@@ -130,15 +142,7 @@ export default class Composer extends React.Component {
                 Cancel
               </button>
             </div>
-            <div className="col-sm-auto py-1">
-              <button
-                type="button"
-                onClick={()=>this.props.createID()}
-                className="btn btn-outline-secondary btn-block"
-              >
-                Create ID
-              </button>
-            </div>
+
             <div className="col py-1">
               <button
                 type="button"

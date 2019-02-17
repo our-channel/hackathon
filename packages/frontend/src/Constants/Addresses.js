@@ -1,0 +1,6 @@
+
+const RELAY_ADDRESS = "0x41248911ee8058f9c812ee342c9f43de31455909";
+
+export {
+  RELAY_ADDRESS
+}

@@ -1,0 +1,33 @@
+.contact {
+
+  .send {
+    font-size: 1.5em;
+
+    &:hover {
+      cursor: pointer;
+      font-size: 1.7em;
+    }
+  }
+
+  .copy {
+    font-size: 1em;
+    
+    &:hover {
+      cursor: pointer;
+      font-size: 1.1em;
+    }
+  }
+
+  .icon {
+
+    .identicon {
+
+    }
+  }
+}
+
+.contacts {
+  .header-text {
+    font-size: 2em;
+  }
+}

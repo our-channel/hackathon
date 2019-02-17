@@ -1,11 +1,19 @@
 import {connect} from 'react-redux';
 import Contacts from './Contacts';
+import Contact from 'Model/Contact';
+import {default as conOps} from 'Redux/contacts/operations';
 
 const s2p = state => {
+  //TODO: need to query ID contract to get list of contacts
+  let w3 = state.web3;
+  let acct = null;
+  if(w3) {
+    acct = w3.account;
+  }
   return {
-    web3: state.web3.web3,
-    idContract: state.web3.idContract,
-    idFactory: state.web3.idFactory
+    contacts: [new Contact({
+      idContractAddress: acct //just mocked up
+    })]
   }
 }
 
@@ -16,7 +24,7 @@ const d2p = (dispatch,ownProps) => {
       let web3 = ownProps.web3;
       let addrs = await web3.getAccounts();
       let idFactory = ownProps.idFactory;
-      
+
       return idFactory.createChannel(addrs[0])
               .then(r=>{
                 console.log("Create channel result", r);
@@ -24,6 +32,10 @@ const d2p = (dispatch,ownProps) => {
               .catch(e=>{
                 console.log("Create channel failed",e);
               })
+    },
+
+    showAdd: () => {
+      dispatch(conOps.toggleAdd())
     }
   }
 }

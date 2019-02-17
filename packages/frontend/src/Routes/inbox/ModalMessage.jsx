@@ -37,7 +37,7 @@ export class ModalMessage extends React.Component {
                   <small className="text-uppercase text-muted">From</small>
                   <h4>
                     <a href="'mailto:'+selected.address">
-                      {this.props.message.address}
+                      {this.props.message.sender}
                     </a>
                   </h4>
                 </Col>
@@ -48,7 +48,7 @@ export class ModalMessage extends React.Component {
                 <Col sm={12}>
                   <p
                     dangerouslySetInnerHTML={{
-                      __html: this.props.message.message
+                      __html: this.props.message.body
                     }}
                   />
                 </Col>
