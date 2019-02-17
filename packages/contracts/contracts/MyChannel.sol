@@ -73,8 +73,8 @@ contract MyChannel {
         MyChannel channelInstance =  MyChannel(senderChannelAddress);
         address senderChannelOwner = channelInstance.GetOwner();
 
-
-        require(senderChannelOwner == signerAddress);
+        //Bring this back when signing is working
+        //require(senderChannelOwner == signerAddress);
 
         // if sender is the owner of the contract no whitelist check, otherwise should be in whitelist
         require ((senderChannelOwner == owner) || (contactWhitelistMap[senderChannelAddress]));
