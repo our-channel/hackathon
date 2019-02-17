@@ -25,7 +25,6 @@ const menuItems = [
     label: "Inbox",
     href: "inbox"
   },
-
   {
     id: "contacts",
     iconClass: "fa fa-address-book-o",
@@ -46,7 +45,9 @@ const buildMenuItem = (props, match, location, m, i) => {
   } = m;
   let classes = classnames("d-inline-flex",
                            "flex-column",
-                           "justify-content-start");
+                           "sidebar-icon-color",
+                           "justify-content-start",
+                           "sidebar-background-color");
 
   let navLink = null;
 
@@ -72,7 +73,6 @@ const buildMenuItem = (props, match, location, m, i) => {
               <span className="nav-item-label">{label}</span>
             </div>
         }
-
       </Button>
     );
   } else if(iconImage) {
@@ -100,7 +100,6 @@ const buildMenuItem = (props, match, location, m, i) => {
       {navLink}
     </NavItem>
   );
-
 }
 
 export default class Sidebar extends React.Component {
@@ -113,13 +112,14 @@ export default class Sidebar extends React.Component {
                                 "pt-0",
                                 "justify-content-start",
                                 "align-items-start",
-                                "bg-light",
                                 "sidebar",
+                                "sidebar-background-color",
                                 {sub: isSub})
     return (
       <div className={navClasses}>
         <div >
-          <Nav vertical className="border flex-column">
+          <Nav vertical className="border flex-column" style={{
+  position: 'sticky'}}>
 
             {
               menuItems.map((m,i)=>{

@@ -33,8 +33,8 @@ const loadFail = (state=INIT, action) => {
 
 const incoming = (state=INIT, action) => {
   let msgs = [
-    ...state.messages,
-    ...action.messages
+    ...action.messages,
+    ...state.messages
   ];
   return {
     ...state,

@@ -1,7 +1,8 @@
 pragma solidity >=0.4.20;
 import "./MyChannel.sol";
+import "./RelayRecipient.sol";
 
-contract MyChannelFactory {
+contract MyChannelFactory is RelayRecipient {
     struct Holder {
         address holderAddress;
         address channelContractAddress;
@@ -44,5 +45,9 @@ contract MyChannelFactory {
         targetInstance.AddMessage(senderChannelAddress, ipfsAddress, v,  r, s);
 
         emit MessageRelayed( targetContractAddress, senderChannelAddress , ipfsAddress);
+    }
+
+    function accept_relayed_call(address relay, address from, bytes memory encoded_function, uint gas_price, uint transaction_fee) public view returns(uint32) {
+        return 0;
     }
 }

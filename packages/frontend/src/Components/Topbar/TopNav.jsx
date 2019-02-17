@@ -5,32 +5,31 @@ import {
   Nav,
   NavLink,
   NavItem,
-  Button,
   UncontrolledDropdown,
+  Button,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
 
-
-
 const navItems = [
+  /*
   {
     button: "Get Started",
     href: "/app/signup"
-  }
+  }*/
 ];
 
 const buildNavItem = (props, item, idx) => {
   if(item.button) {
-    return (
-      <Button key={idx} color="warning" size="sm" onClick={
-          e=>{
-            window.location=item.href
-          }
-        }>
-        <span className="button-text">{item.button}</span>
-      </Button>
+    return ( 
+        <Button key={idx} color="warning" size="sm" onClick={
+            e=>{
+              window.location=item.href
+            }
+          }>
+          <span className="button-text">{item.button}</span>
+        </Button>
     );
   } else if(item.subs) {
     return (
@@ -63,10 +62,8 @@ const buildNavItem = (props, item, idx) => {
         </NavItem>
       )
     }
-
   }
 }
-
 
 export default class TopNav extends React.Component {
 
@@ -74,25 +71,25 @@ export default class TopNav extends React.Component {
 
     return (
       <Fragment>
-
         <Navbar dark  className="d-none d-md-flex top-nav">
-
               <Nav>
+                <NavItem>
+                  <img src={require('../../imgs/globe_logo_green.png')} alt='logo'
+                  height='60px'
+                  className="logo-image"
+                  />
+                </NavItem>
+                <NavItem>
+                  <h1 className="logo-text">ur Channel</h1>
+                </NavItem>
                 {
                   navItems.map((m,i)=>{
                     return buildNavItem(this.props, m, i)
                   })
                 }
               </Nav>
-
         </Navbar>
-
-
-
       </Fragment>
-
     )
   }
-
-
 }

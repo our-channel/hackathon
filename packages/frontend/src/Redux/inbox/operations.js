@@ -167,7 +167,6 @@ var messages = [
 
 const init = () => async dispatch => {
   dispatch(Creators.loadRequest());
-  console.log(messages);
   dispatch(Creators.loadSuccess(messages));
 }
 
