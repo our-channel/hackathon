@@ -65,22 +65,6 @@ contract MyChannel {
         return contactWhitelistArray;
     }
 
-    function AddMessageEx (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
-
-        /*address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
-        emit MessageReceived(senderChannelAddress, ipfsAddress );
-
-        /* if ( require(senderPublicKey == contactWhitelist[senderChannelAddress]))
-            emit MessageReceived(senderChannelAddress, ipfsAddress );
-        else
-            emit MessageReceived(senderChannelAddress, 0 );         */
-
-
-        /* require(senderPublicKey == contactWhitelist[senderChannelAddress]); */
-        /* emit MessageReceived(senderChannelAddress, ipfsAddress ) */
-
-    }
-
     function AddMessage(address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
 
 
@@ -93,7 +77,7 @@ contract MyChannel {
         require(senderChannelOwner == signerAddress);
 
         // if sender is the owner of the contract no whitelist check, otherwise should be in whitelist
-        require (senderChannelOwner == this.owner) || (contactWhitelistMap[senderChannelOwner]);
+        require ((senderChannelOwner == owner) || (contactWhitelistMap[senderChannelAddress]));
         emit MessageReceived(senderChannelAddress, ipfsAddress );
     }
 
@@ -101,17 +85,4 @@ contract MyChannel {
             bytes32 msgHash = keccak256(abi.encodePacked(ipfsAddress));
             return ecrecover(msgHash, v, r, s);
     }
-
-
-    /* function stringToBytes32(string memory source) returns (bytes32 result) {
-        bytes memory tempEmptyStringTest = bytes(source);
-        if (tempEmptyStringTest.length == 0) {
-            return 0x0;
-        }
-
-        assembly {
-            result := mload(add(source, 32))
-        }
-    } */
-
 }
