@@ -75,7 +75,7 @@ const ABI = [
 			},
 			{
 				"name": "ipfsAddress",
-				"type": "bytes"
+				"type": "string"
 			},
 			{
 				"name": "v",
@@ -158,7 +158,7 @@ const ABI = [
 			{
 				"indexed": false,
 				"name": "ipfs_address",
-				"type": "bytes"
+				"type": "string"
 			}
 		],
 		"name": "MessageReceived",
@@ -180,11 +180,12 @@ export default class IDContractService {
     });
   }
 
-  sendMessage(senderChannel, ipfsUrl) {
-		//TODO: sign the freaking ipfsUrl
+  sendMessage(senderChannel, ipfsUrl, sig) {
+
 		return new Promise((done,err)=>{
 			let txnHash = [];
-			this.contract.methods.AddMessage(senderChannel, ipfsUrl, 1, this.web3.utils.fromAscii("0x100"), this.web3.utils.fromAscii("0x200"))
+			let fromAscii = this.web3.utils.fromAscii;
+			this.contract.methods.AddMessage(senderChannel, ipfsUrl, sig.v, sig.r, sig.s)
 	          .send({
 							from: this.from
 						})

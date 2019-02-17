@@ -2,7 +2,7 @@ import {Creators} from './actions';
 import ChannelListener from 'Services/ChannelMessageListener';
 import {default as inboxOps} from 'Redux/inbox/operations';
 
-const TEST_CONTRACT = "0x539d7c973c53d0f0481f3efc4e0038a4201a7b2c";
+const TEST_CONTRACT = "0x41248911ee8058f9c812ee342c9f43de31455909";
 
 let channelListener = null;
 

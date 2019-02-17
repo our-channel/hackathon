@@ -1,5 +1,6 @@
 import {Creators} from './actions';
 import IDContract from 'Services/IDContractService';
+import MsgIO from 'Services/MessageIO';
 
 const createId = () => async (dispatch,getState) => {
   let state = getState();
@@ -18,10 +19,14 @@ const sendMessage = (to, msg) => async (dispatch,getState) => {
     contractAddress: to
   });
   let contractAddress = state.keymanager.didAddress;
-  let hash = web3.eth.utils.sha3(JSON.stringify(msg));
+  let {
+    hash,
+    sig
+  } = await MsgIO.instance.encodeOutgoing(msg, idContract);
+
   dispatch(Creators.sendStarted());
   try {
-    let txnHash = await idContract.sendMessage(contractAddress, hash);
+    let txnHash = await idContract.sendMessage(contractAddress, hash, sig);
     dispatch(Creators.sendCompleted(txnHash));
   } catch (e) {
     dispatch(Creators.sendFailure(e))
