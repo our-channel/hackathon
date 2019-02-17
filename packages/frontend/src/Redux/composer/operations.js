@@ -25,7 +25,7 @@ const sendMessage = (to, msg) => async (dispatch,getState) => {
 
   dispatch(Creators.sendStarted());
   try {
-    let txnHash = await relayContract.relayMessage(contractAddress, contractAddress, hash, sig);
+    let txnHash = await relayContract.relayMessage(to, contractAddress, hash, sig);
     dispatch(Creators.sendCompleted(txnHash));
   } catch (e) {
     dispatch(Creators.sendFailure(e))
