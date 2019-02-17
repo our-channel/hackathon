@@ -32,7 +32,7 @@ const sendMessage = (to, msg) => async (dispatch,getState) => {
   }
 }
 
-const toggleModal = () => dispatch => {
+const toggleModal = (user) => dispatch => {
   dispatch(Creators.toggleModal())
 }
 
