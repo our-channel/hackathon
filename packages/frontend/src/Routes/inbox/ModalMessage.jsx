@@ -58,8 +58,8 @@ export class ModalMessage extends React.Component {
               </Row>
             </ModalBody>
             <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>Reply</Button>{' '}
-            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+            <Button color="primary" onClick={this.props.toggle}>Reply</Button>{' '}
+            <Button color="secondary" onClick={this.props.toggle}>Cancel</Button>
         </ModalFooter>
     </Modal>
       );

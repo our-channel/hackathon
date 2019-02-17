@@ -40,6 +40,16 @@
     margin-right: 20px;
   }
 
+  .logo-image {
+    margin-left: 20px;
+  }
+
+  .logo-text{
+    font-size:65px;
+    padding-bottom: 5px;
+    color: theme-color("nav-text") !important;
+  }
+
   .nav-link {
     color: theme-color("nav-text") !important;
     @media (max-width: 768px) {
@@ -49,5 +59,9 @@
 
   .nav-bg {
     background-color: theme-color("nav-bg-color");
+  }
+
+  .nav-text {
+
   }
 }

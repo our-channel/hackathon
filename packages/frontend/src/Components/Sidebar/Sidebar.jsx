@@ -25,7 +25,6 @@ const menuItems = [
     label: "Inbox",
     href: "inbox"
   },
-
   {
     id: "contacts",
     iconClass: "fa fa-address-book-o",
@@ -119,7 +118,8 @@ export default class Sidebar extends React.Component {
     return (
       <div className={navClasses}>
         <div >
-          <Nav vertical className="border flex-column">
+          <Nav vertical className="border flex-column" style={{
+  position: 'sticky'}}>
 
             {
               menuItems.map((m,i)=>{

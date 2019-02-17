@@ -5,7 +5,6 @@ import {
   Nav,
   NavLink,
   NavItem,
-  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -24,13 +23,17 @@ const navItems = [
 const buildNavItem = (props, item, idx) => {
   if(item.button) {
     return (
-      <Button key={idx} color="warning" size="sm" onClick={
-          e=>{
-            window.location=item.href
-          }
-        }>
-        <span className="button-text">{item.button}</span>
-      </Button>
+      <div>
+        {/*
+        <Button key={idx} color="warning" size="sm" onClick={
+            e=>{
+              window.location=item.href
+            }
+          }>
+          <span className="button-text">{item.button}</span>
+        </Button>
+        */}
+      </div>
     );
   } else if(item.subs) {
     return (
@@ -78,6 +81,15 @@ export default class TopNav extends React.Component {
         <Navbar dark  className="d-none d-md-flex top-nav">
 
               <Nav>
+                <NavItem>
+                  <img src={require('../../imgs/globe_logo_green.png')} alt='logo'
+                  height='60px'
+                  className="logo-image"
+                  />
+                </NavItem>
+                <NavItem>
+                  <h1 className="logo-text">ur Channel</h1>
+                </NavItem>
                 {
                   navItems.map((m,i)=>{
                     return buildNavItem(this.props, m, i)

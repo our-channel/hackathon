@@ -168,22 +168,15 @@ var messages = [
 const init = () => async dispatch => {
   console.log("WTF");
   dispatch(Creators.loadRequest());
-  console.log(messages);
   dispatch(Creators.loadSuccess(messages));
 }
 
 
-const incomingMessage = (message) => async (dispatch,getState) => {
-  let state = getState();
-  console.log("STATE", state);
-  
-  let web3 = state.web3.web3;
-  let idContract = state.web3.idContract;
-  let contractAddress = state.keymanager.didAddress;
-  console.log("My Id contract", contractAddress);
-  await idContract.sendMessage(contractAddress, "0x8976564");
+const incomingMessage = (message) => async dispatch => {
+  dispatch(Creators.addMessage(message));
 }
 
 export default {
-  init
+  init,
+  incomingMessage
 }

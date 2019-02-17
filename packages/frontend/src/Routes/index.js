@@ -30,7 +30,7 @@ class MainApp extends Component {
         <Composer />
 
         <Row className="no-gutters w-100">
-          <Col md="1" className="d-flex flex-column justify-content-center align-items-start">
+          <Col md="1" className="d-flex flex-column align-items-start">
             <Sidebar />
           </Col>
           <Col md="11">
