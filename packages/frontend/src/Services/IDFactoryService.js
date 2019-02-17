@@ -325,8 +325,8 @@ export default class IDContractService {
     });
   }
 
-  async createChannel(address, encKey) {
-    return this.contract.methods.createChannel(address, encKey).send({from: address})
+  async createChannel(address, encKey, uName) {
+    return this.contract.methods.createChannel(address, encKey, uName).send({from: address})
             .then(r=>{
               console.log("RESULT", r);
             })
