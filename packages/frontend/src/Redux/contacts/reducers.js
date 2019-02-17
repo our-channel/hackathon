@@ -5,7 +5,8 @@ const INIT = {
   loading: false,
   error: null,
   showingAdd: false,
-  searchResults: []
+  searchResults: [],
+  remoteContacts: []
 }
 
 const toggleAdd = (state=INIT) => {
@@ -41,11 +42,37 @@ const searchFail = (state=INIT, action) => {
   }
 }
 
+const addWLStart = (state=INIT) => {
+  return {
+    ...state,
+    loading: true,
+    error: null
+  }
+}
+
+const addWLOk = (state=INIT, action) => {
+  return {
+    ...state,
+    loading: true,
+    remoteContacts: action.contacts
+  }
+}
+
+const initOk = (state=INIT, action) => {
+  return {
+    ...state,
+    loading: false,
+    error: null,
+    remoteContacts: action.contacts
+  }
+}
+
 const HANDLERS = {
   [Types.TOGGLE_MODAL]: toggleAdd,
   [Types.SEARCH_START]: searchStart,
   [Types.SEARCH_COMPLETED]: searchOk,
-  [Types.SEARCH_FAILURE]: searchFail
+  [Types.SEARCH_FAILURE]: searchFail,
+  [Types.INIT_SUCCESS]: initOk
 }
 
 export default createReducer(INIT, HANDLERS);

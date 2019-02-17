@@ -2,21 +2,16 @@ import KeyManager from 'Services/KeyManager';
 
 const ABI = [
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "verificationInfo",
-		"outputs": [
+		"inputs": [
 			{
-				"name": "",
-				"type": "bytes"
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_publicKey",
+				"type": "string"
 			}
 		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -42,14 +37,71 @@ const ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_owner",
+				"name": "_logTitle",
+				"type": "string"
+			},
+			{
+				"name": "_logAddress",
 				"type": "address"
+			},
+			{
+				"name": "_logString",
+				"type": "string"
+			},
+			{
+				"name": "_logUint",
+				"type": "uint256"
 			}
 		],
-		"name": "SetOwner",
+		"name": "AddLogMessage",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetLogListCount",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "GetLogListAt",
+		"outputs": [
+			{
+				"name": "_logTitle",
+				"type": "string"
+			},
+			{
+				"name": "_logAddress",
+				"type": "address"
+			},
+			{
+				"name": "_logString",
+				"type": "string"
+			},
+			{
+				"name": "_logUint",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -64,20 +116,6 @@ const ABI = [
 		],
 		"payable": false,
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_publicKey",
-				"type": "string"
-			}
-		],
-		"name": "SetPublicKey",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -100,10 +138,6 @@ const ABI = [
 			{
 				"name": "contactChannelAddress",
 				"type": "address"
-			},
-			{
-				"name": "publickey",
-				"type": "bytes"
 			}
 		],
 		"name": "AddContactToWhitelist",
@@ -120,11 +154,25 @@ const ABI = [
 				"type": "address"
 			}
 		],
-		"name": "GetContactPublicKey",
+		"name": "IsContactInWhitelist",
 		"outputs": [
 			{
-				"name": "publicKey",
-				"type": "bytes"
+				"name": "exist",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetWhitelistedContacts",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address[]"
 			}
 		],
 		"payable": false,
@@ -156,6 +204,36 @@ const ABI = [
 			}
 		],
 		"name": "AddMessage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "senderChannelAddress",
+				"type": "address"
+			},
+			{
+				"name": "ipfsAddress",
+				"type": "string"
+			},
+			{
+				"name": "v",
+				"type": "uint8"
+			},
+			{
+				"name": "r",
+				"type": "bytes32"
+			},
+			{
+				"name": "s",
+				"type": "bytes32"
+			}
+		],
+		"name": "AddMessageEx",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
@@ -199,10 +277,13 @@ export default class IDContractService {
     this.contract = new props.web3.eth.Contract(ABI, props.contractAddress);
 		this.web3 = props.web3;
 		this.from = props.account;
+		this.whitelisted = [];
 
     [
       'sendMessage',
-			'getEncryptionKey'
+			'getEncryptionKey',
+			'addToWhitelist',
+			'retrieveWhitelist'
     ].forEach(fn=>{
       this[fn] = this[fn].bind(this);
     });
@@ -242,5 +323,38 @@ export default class IDContractService {
 			this.encKey = KeyManager.instance.publicEncryptionKey;
 		}
 		return this.encKey;
+	}
+
+	addToWhitelist(address) {
+		return new Promise((done,err)=>{
+			let txnHash = [];
+			this.contract.methods.AddContactToWhitelist(address)
+				.send({
+					from: this.from
+				})
+				.on('transactionHash', hash => {
+					txnHash.push(hash);
+				})
+				.on('confirmation', (confirmationNumber) => {
+					if (confirmationNumber === 1) {
+						done(txnHash[0])
+					}
+				})
+				.on('error', (error) => {
+					err(error)
+				})
+				.catch(e=>{
+					err(e);
+				})
+		});
+	}
+
+	async retrieveWhitelist() {
+		let r = await this.contract.methods.GetWhitelistedContacts()
+						.call({
+							from:this.from,
+							gasLimit: 100000
+						});
+		return r;
 	}
 }

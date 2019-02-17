@@ -5,6 +5,8 @@ const {Types, Creators} = createActions({
   createIdRequest: null,
   createIdSuccess: ['didAddress'],
   createIdFailure: ['error'],
+
+  initSuccess: ['accounts']
 }, {prefix: "signup."});
 
 export {

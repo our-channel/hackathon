@@ -12,9 +12,7 @@ const s2p = state => {
   }
 
   return {
-    contacts: [new Contact({
-      idContractAddress: acct //just mocked up
-    })]
+    contacts: state.contacts.remoteContacts
   }
 }
 

@@ -6,7 +6,8 @@ const s2p = state => {
   return {
     loading: state.contacts.loading,
     error: state.contacts.error,
-    showing: state.contacts.showingAdd
+    showing: state.contacts.showingAdd,
+    searchResults: state.contacts.searchResults
   }
 }
 
@@ -14,7 +15,8 @@ const d2p = dispatch => {
   return {
     cancel: () => dispatch(cOps.toggleAdd()),
     showAdd: () => dispatch(cOps.toggleAdd()),
-    search: (search) => dispatch(cOps.search(search))
+    search: (search) => dispatch(cOps.search(search)),
+    addToWL: (name,addr) => dispatch(cOps.addToWatchlist(name,addr))
   }
 }
 

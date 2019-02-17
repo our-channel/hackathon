@@ -5,10 +5,7 @@ const INIT = {
   loading: false,
   error: null,
   web3: null,
-  account: null,
-  idFactory: null,
-  idContract: null,
-  userRegistry: null
+  account: null
 }
 
 const initRequest = (state=INIT) => {
@@ -24,9 +21,6 @@ const initSuccess = (state=INIT, action) => {
     ...state,
     loading: false,
     web3: action.web3,
-    idFactory: action.idFactory,
-    idContract: action.idContract,
-    userRegistry: action.userRegistry,
     account: action.account
   }
 }

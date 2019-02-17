@@ -8,7 +8,7 @@ let channelListener = null;
 
 const init = () => async (dispatch,getState) => {
   let state = getState();
-  let relayService = state.web3.idFactory;
+  let relayService = state.services.idFactory;
   console.log("RELAY", relayService);
 
   //TODO: read actual key from local storage

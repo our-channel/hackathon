@@ -66,12 +66,15 @@ export default class ChannelMessageListener {
      );
 
      var events = _.get(r, "data.data.relayedMessages", []);
+     events = events.filter(e=>e.targetAddress.toLowerCase()===web3.account);
+
      events.forEach(async evt=>{
        if(this.retrieved[evt.id]) {
          return;
        }
+       
        this.retrieved[evt.id] = true;
-       let sender = evt.sender;
+       let sender = evt.senderChannelAddress;
        let idContract = new IdContract({
          web3: web3.web3,
          contractAddress: sender,

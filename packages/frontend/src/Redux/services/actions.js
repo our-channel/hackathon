@@ -1,10 +1,9 @@
 import {createActions} from 'reduxsauce';
 
 const {Types, Creators} = createActions({
-  initRequest: null,
-  initSuccess: ['web3', 'account'],
-  initFailure: ['error']
-}, {prefix: "web3."});
+  //these were for testing
+  initSuccess: ['idContract', 'idFactory', 'userRegistry']
+}, {prefix: "services."});
 
 export {
   Types,

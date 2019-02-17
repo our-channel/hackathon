@@ -3,7 +3,8 @@ import {createReducer} from 'reduxsauce';
 
 const INIT = {
   loading: false,
-  error: null
+  error: null,
+  localAccounts: []
 }
 
 const createIdRequest = (state=INIT) => {
@@ -30,10 +31,20 @@ const createIdFail = (state=INIT, action) => {
   }
 }
 
+const initComplete = (state=INIT, action) => {
+  return {
+    ...state,
+    loading: false,
+    error: null,
+    localAccounts: action.accounts
+  }
+}
+
 const HANDLERS = {
   [Types.CREATE_ID_REQUEST]: createIdRequest,
   [Types.CREATE_ID_SUCCESS]: createIdSuccess,
   [Types.CREATE_ID_FAILURE]: createIdFail,
+  [Types.INIT_SUCCESS]: initComplete
 }
 
 export default createReducer(INIT, HANDLERS);

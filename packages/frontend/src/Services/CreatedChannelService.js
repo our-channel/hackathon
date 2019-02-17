@@ -1,4 +1,5 @@
 const axios = require('axios');
+const _ = require("lodash");
 
 let inst = null;
 
@@ -11,16 +12,18 @@ export default class ChannelCreatedService {
   }
 
   async getCreatedChannels(holderAddress) {
+
     var events = await axios.post(
-      "https://api.thegraph.com/subgraphs/name/realdave/chancreated",
+      "https://api.thegraph.com/subgraphs/name/realdave/channelcreated",
       {
-        query: "query($holderAddress: String!) { createdChannels(holderAddress: $holderAddress) { id holderAddress channelContractAddress publicKey } }",
+        query: "query($holderAddress: String!) { createdChannels(holderAddress: $holderAddress) { id holderAddress channelContractAddress publicKey userName } }",
         variables: { "holderAddress": holderAddress },
       }
     );
-
-    console.log("CreateChannel RESULTS", events);
-
-    return events.data.createdChannels;
+    let hits = _.get(events, "data.data.createdChannels", []);
+    hits = hits.filter(h=>{
+      return h.holderAddress.toLowerCase()===holderAddress.toLowerCase()
+    });
+    return hits;
   }
 }

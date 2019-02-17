@@ -15,7 +15,8 @@ export default class AddModal extends React.Component {
     super(props);
     [
       'changeProp',
-      'search'
+      'search',
+      'addToWL'
     ].forEach(fn=>{
       this[fn] = this[fn].bind(this);
     });
@@ -35,6 +36,13 @@ export default class AddModal extends React.Component {
     })
   }
 
+  addToWL(addr) {
+    this.props.addToWL(this.state.search, addr)
+    .then(r=>{
+
+    })
+  }
+
   changeProp(id, val) {
     this.setState({
       [id]: val
@@ -45,7 +53,8 @@ export default class AddModal extends React.Component {
     const {
       loading,
       error,
-      showing
+      showing,
+      searchResults
     } = this.props;
 
     let {
@@ -94,6 +103,28 @@ export default class AddModal extends React.Component {
             </div>
           </div>
 
+          {
+            searchResults && searchResults.length > 0 &&
+            <div className="w-100 border form-row py-2 justify-content-center align-items-center">
+              <label htmlFor="sendTo" className="col-sm-2 mb-0">
+                ID Address:
+              </label>
+              <div className="col">
+                {searchResults[0]}
+              </div>
+              <div className="col h-100 justify-content-center align-items-center">
+                <button type="button"
+                        onClick={()=>{
+                          this.addToWL(searchResults[0])
+                        }}>
+                  <i className="fa fa-plus"/>
+                </button>
+              </div>
+            </div>
+          }
+
+
+
           <div className="form-row py-2">
             <div className="col-sm-auto py-1">
               <button
@@ -102,16 +133,6 @@ export default class AddModal extends React.Component {
                 className="btn btn-outline-secondary btn-block"
               >
                 Cancel
-              </button>
-            </div>
-
-            <div className="col py-1">
-              <button
-                type="button"
-                onClick={this.sendMsg}
-                className="btn btn-secondary float-right ml-1 disabled"
-              >
-                Add
               </button>
             </div>
           </div>
