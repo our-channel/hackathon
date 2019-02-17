@@ -4,6 +4,96 @@ import {
 
 const ABI = [
 	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_hub_addr",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_message_data",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_sender",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "orig_sender",
+				"type": "address"
+			},
+			{
+				"name": "msg_data",
+				"type": "bytes"
+			}
+		],
+		"name": "get_sender_from_data",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "get_recipient_balance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_userRegistryAddress",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -19,6 +109,11 @@ const ABI = [
 			{
 				"indexed": false,
 				"name": "publicKey",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "userName",
 				"type": "string"
 			}
 		],
@@ -51,11 +146,15 @@ const ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "user",
+				"name": "userAddress",
 				"type": "address"
 			},
 			{
 				"name": "publicKey",
+				"type": "string"
+			},
+			{
+				"name": "userName",
 				"type": "string"
 			}
 		],
@@ -136,6 +235,75 @@ const ABI = [
 			}
 		],
 		"name": "RelayMessage",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "relay",
+				"type": "address"
+			},
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "encoded_function",
+				"type": "bytes"
+			},
+			{
+				"name": "gas_price",
+				"type": "uint256"
+			},
+			{
+				"name": "transaction_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "accept_relayed_call",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint32"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "relay",
+				"type": "address"
+			},
+			{
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"name": "encoded_function",
+				"type": "bytes"
+			},
+			{
+				"name": "success",
+				"type": "bool"
+			},
+			{
+				"name": "used_gas",
+				"type": "uint256"
+			},
+			{
+				"name": "transaction_fee",
+				"type": "uint256"
+			}
+		],
+		"name": "post_relayed_call",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
