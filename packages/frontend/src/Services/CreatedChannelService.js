@@ -9,7 +9,7 @@ export default class ChannelCreatedService {
     }
     return inst;
   }
-  
+
   async getCreatedChannels(holderAddress) {
     var events = await axios.post(
       "https://api.thegraph.com/subgraphs/name/realdave/chancreated",
@@ -18,6 +18,8 @@ export default class ChannelCreatedService {
         variables: { "holderAddress": holderAddress },
       }
     );
+
+    console.log("CreateChannel RESULTS", events);
 
     return events.data.createdChannels;
   }

@@ -7,9 +7,10 @@ const s2p = state => {
   //TODO: need to query ID contract to get list of contacts
   let w3 = state.web3;
   let acct = null;
-  if(w3) {
+  if(w3 && w3.account) {
     acct = w3.account;
   }
+
   return {
     contacts: [new Contact({
       idContractAddress: acct //just mocked up

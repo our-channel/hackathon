@@ -1,5 +1,5 @@
 
-const RELAY_ADDRESS = "0x0d09888e5dc53a67bc001ebbc6a670ac3e82ff4e";
+const RELAY_ADDRESS = "0x8acc448d1c95a9875bf4a1127386c1cdf2193ba7";
 
 export {
   RELAY_ADDRESS
