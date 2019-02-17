@@ -38,7 +38,7 @@ const createId = () => async (dispatch,getState) => {
     let web3 = state.web3.web3;
     let idFactory = state.services.idFactory;
     let accts = await web3.eth.getAccounts();
-    await idFactory.createChannel(accts[0], KeyManager.instance.publicEncryptionKey, "mike");
+    await idFactory.createChannel(accts[0], KeyManager.instance.publicEncryptionKey, "chim");
   }
 export default {
   init,
