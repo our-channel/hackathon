@@ -8,7 +8,7 @@ contract MyChannel {
 
     string pubicKey;
 
-    mapping (address => bytes) contactWhitelist; // contact_address to contact_publickey
+    mapping (address => string) contactWhitelist; // contact_address to contact_publickey
 
     /* event WalletVerified(address indexed _verifiedBy, address walletAddress); */
 
@@ -59,11 +59,11 @@ contract MyChannel {
         return verified;
     } */
 
-    function AddContactToWhitelist (address contactChannelAddress, bytes memory publickey) public {
+    function AddContactToWhitelist (address contactChannelAddress, string memory publickey) public {
         contactWhitelist[contactChannelAddress] = publickey;
     }
 
-    function GetContactPublicKey (address contact) public view returns(bytes memory publicKey) {
+    function GetContactPublicKey (address contact) public view returns(string memory publicKey) {
         publicKey = contactWhitelist[contact];
     }
 
