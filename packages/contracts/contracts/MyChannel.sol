@@ -1,75 +1,91 @@
 pragma solidity >=0.4.20;
 
 contract MyChannel {
-    bytes public verificationInfo;
-    /* address verifiedBy; // Set by Issure proposing a verifier
-    bool    verified;   // Set by proposed verifier */
-    address owner;
 
-    string pubicKey;
-
-    mapping (address => string) contactWhitelist; // contact_address to contact_publickey
-
-    /* event WalletVerified(address indexed _verifiedBy, address walletAddress); */
-
-    event MessageReceived(address sender , string ipfs_address);
-
-    constructor() public{
-        /* verified   = false;
-        verifiedBy = address(0); */
+//////////////////////////////////////
+    struct LogMessage {
+        string  logTitle;
+        address logAddress;
+        string  logString;
+        uint    logUint;
     }
 
-    function SetOwner(address _owner) public {
+    LogMessage[] logMessageList;
+
+    function AddLogMessage(string memory  _logTitle, address _logAddress, string memory _logString,uint _logUint ) public{
+        logMessageList.push(LogMessage({
+            logTitle:_logTitle,
+            logAddress:_logAddress,
+            logString:_logString,
+            logUint:_logUint}));
+    }
+
+    function GetLogListCount () public view returns(uint) {
+        return logMessageList.length;
+    }
+
+    function GetLogListAt (uint index) public view returns(string  memory _logTitle,address _logAddress, string memory _logString, uint _logUint) {
+        LogMessage memory _logMessage = logMessageList[index];
+        _logTitle = _logMessage.logTitle;
+        _logAddress = _logMessage.logAddress;
+        _logString = _logMessage.logString;
+        _logUint = _logMessage.logUint;
+    }
+//////////////////////////////////////
+
+    address owner;
+    string pubicKey;
+    mapping (address => bool) contactWhitelistMap; // contact_address to contact_publickey
+    address[] contactWhitelistArray;
+    event MessageReceived(address sender , string ipfs_address);
+
+    constructor(address _owner,string memory _publicKey) public{
         owner = _owner;
+        pubicKey = _publicKey;
     }
 
     function GetOwner() public view returns (address){
         return owner;
     }
 
-    function SetPublicKey(string memory _publicKey) public {
-             pubicKey = _publicKey;
-    }
-
     function GetPublicKey() public view returns (string memory publicKey) {
         return pubicKey;
     }
 
-
-/*
-    function SetMetaInfo(bytes _info) public {
-        verificationInfo = _info;
+    function AddContactToWhitelist (address contactChannelAddress) public {
+        contactWhitelistMap[contactChannelAddress] = true;
+        contactWhitelistArray.push(contactChannelAddress);
     }
 
-    function GetMetaInfo() public view returns (bytes){
-        return verificationInfo;
-    } */
-
-    /* function SetVerifiedBy() public {
-        if (msg.sender == verifiedBy) { // if the message sender is the one who has proposed by contract owner, allow to proceed
-            verified = true;
-        }
-    } */
-
-    /* function GetVerifiedBy() public view returns(address) {
-        return verifiedBy;
-    } */
-
-    /* function IsVerified() public view returns (bool){
-        return verified;
-    } */
-
-    function AddContactToWhitelist (address contactChannelAddress, string memory publickey) public {
-        contactWhitelist[contactChannelAddress] = publickey;
+    function IsContactInWhitelist(address contact) public view returns(bool exist) {
+        exist = contactWhitelistMap[contact];
     }
 
-    function GetContactPublicKey (address contact) public view returns(string memory publicKey) {
-        publicKey = contactWhitelist[contact];
+    function GetWhitelistedContacts () public view returns(address[] memory ) {
+        return contactWhitelistArray;
     }
 
     function AddMessage (address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
-        /* address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
 
+        /*address senderPublicKey = this.recoverPublicKey(ipfsAddress,v,r,s); */
+        emit MessageReceived(senderChannelAddress, ipfsAddress );
+
+        /* if ( require(senderPublicKey == contactWhitelist[senderChannelAddress]))
+            emit MessageReceived(senderChannelAddress, ipfsAddress );
+        else
+            emit MessageReceived(senderChannelAddress, 0 );         */
+
+
+        /* require(senderPublicKey == contactWhitelist[senderChannelAddress]); */
+        /* emit MessageReceived(senderChannelAddress, ipfsAddress ) */
+
+    }
+
+    function AddMessageEx(address senderChannelAddress, string memory ipfsAddress, uint8 v, bytes32 r, bytes32 s) public {
+
+        bytes memory _ipfsAddress;
+        address senderPublicKey = this.recoverPublicKey(_ipfsAddress,v,r,s);
+        /* this.AddLogMessage(); */
         emit MessageReceived(senderChannelAddress, ipfsAddress );
 
         /* if ( require(senderPublicKey == contactWhitelist[senderChannelAddress]))
@@ -87,5 +103,17 @@ contract MyChannel {
             bytes32 msgHash = keccak256(abi.encodePacked(ipfsAddress));
             return ecrecover(msgHash, v, r, s);
     }
+
+
+    /* function stringToBytes32(string memory source) returns (bytes32 result) {
+        bytes memory tempEmptyStringTest = bytes(source);
+        if (tempEmptyStringTest.length == 0) {
+            return 0x0;
+        }
+
+        assembly {
+            result := mload(add(source, 32))
+        }
+    } */
 
 }
