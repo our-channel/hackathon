@@ -1,6 +1,9 @@
 import React from "react";
 
 export const InboxHtml = ({ parent, messages }) => {
+  console.log('re-rendering html')
+  console.log('messages:')
+  console.log(messages)
   return (
     <div >
       <ul className="list-group py-2">
@@ -27,6 +30,7 @@ export const InboxHtml = ({ parent, messages }) => {
                     <a
                       className="text-secondary px-md-1"
                       title="Deleted"
+                      href="/"
                     >
                       <span className="icon icon-trash fa fa-fw fa-trash" />
                     </a>

@@ -28,6 +28,14 @@
     color: theme-color("nav-dark-text");
   }
 
+  .sidebar-backround-color{
+    background-color:#666568;
+  }
+
+  .sidebar-icon-color{
+    color:rgba(84,255,0, .9);
+  }
+
   a {
     color: theme-color("nav-dark-text");
 
@@ -44,6 +52,8 @@
 
   .nav-item {
     padding: 15px 5px;
+
+    background-color:#666568;
 
     &:hover {
       color: theme-color("nav-dark-text");

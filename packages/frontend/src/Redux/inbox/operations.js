@@ -171,12 +171,12 @@ const init = () => async dispatch => {
   dispatch(Creators.loadSuccess(messages));
 }
 
-
-const incomingMessage = (message) => async dispatch => {
-  dispatch(Creators.addMessage(message));
+const incomingMessages = (messages) => (dispatch) => {
+  dispatch(Creators.incomingMessages(messages));
 }
+
 
 export default {
   init,
-  incomingMessage
+  incomingMessages
 }

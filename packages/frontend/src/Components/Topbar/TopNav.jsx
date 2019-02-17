@@ -6,25 +6,23 @@ import {
   NavLink,
   NavItem,
   UncontrolledDropdown,
+  Button,
   DropdownToggle,
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
 
-
-
 const navItems = [
+  /*
   {
     button: "Get Started",
     href: "/app/signup"
-  }
+  }*/
 ];
 
 const buildNavItem = (props, item, idx) => {
   if(item.button) {
-    return (
-      <div>
-        {/*
+    return ( 
         <Button key={idx} color="warning" size="sm" onClick={
             e=>{
               window.location=item.href
@@ -32,8 +30,6 @@ const buildNavItem = (props, item, idx) => {
           }>
           <span className="button-text">{item.button}</span>
         </Button>
-        */}
-      </div>
     );
   } else if(item.subs) {
     return (
@@ -66,10 +62,8 @@ const buildNavItem = (props, item, idx) => {
         </NavItem>
       )
     }
-
   }
 }
-
 
 export default class TopNav extends React.Component {
 
@@ -77,9 +71,7 @@ export default class TopNav extends React.Component {
 
     return (
       <Fragment>
-
         <Navbar dark  className="d-none d-md-flex top-nav">
-
               <Nav>
                 <NavItem>
                   <img src={require('../../imgs/globe_logo_green.png')} alt='logo'
@@ -96,15 +88,8 @@ export default class TopNav extends React.Component {
                   })
                 }
               </Nav>
-
         </Navbar>
-
-
-
       </Fragment>
-
     )
   }
-
-
 }

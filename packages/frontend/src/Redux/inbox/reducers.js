@@ -31,10 +31,23 @@ const loadFail = (state=INIT, action) => {
   }
 }
 
+const incoming = (state=INIT, action) => {
+  let msgs = [
+    ...action.messages,
+    ...state.messages
+  ];
+  return {
+    ...state,
+    messages: msgs
+  }
+}
+
 const HANDLERS = {
   [Types.LOAD_REQUEST]: loadRequest,
   [Types.LOAD_SUCCESS]: loadSuccess,
   [Types.LOAD_FAILURE]: loadFail,
+
+  [Types.INCOMING_MESSAGES]: incoming
 }
 
 export default createReducer(INIT, HANDLERS);

@@ -8,6 +8,7 @@ const init = () => async (dispatch,getState)=> {
   if(state.init.initialized) {
     return;
   }
+
   let calls = [];
   if(inboxOps.init) {
     calls.push(dispatch(inboxOps.init()));

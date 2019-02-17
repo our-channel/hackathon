@@ -18057,6 +18057,10 @@ a.text-canvas-bg:hover, a.text-canvas-bg:focus {
     text-align: center; }
   .sidebar .nav-link {
     color: rgba(0, 0, 0, 0.9); }
+  .sidebar .sidebar-backround-color {
+    background-color: #666568; }
+  .sidebar .sidebar-icon-color {
+    color: rgba(84, 255, 0, 0.9); }
   .sidebar a {
     color: rgba(0, 0, 0, 0.9); }
     .sidebar a:hover {
@@ -18066,7 +18070,8 @@ a.text-canvas-bg:hover, a.text-canvas-bg:focus {
     .sidebar a .nav-item-label {
       font-size: .9em; }
   .sidebar .nav-item {
-    padding: 15px 5px; }
+    padding: 15px 5px;
+    background-color: #666568; }
     .sidebar .nav-item:hover {
       color: rgba(0, 0, 0, 0.9);
       background: rgba(0, 0, 0, 0.1);
