@@ -29,7 +29,7 @@
   }
 
   .sidebar-backround-color{
-    background-color:#666568;
+    background-color:#666568 !important;
   }
 
   .sidebar-icon-color{
@@ -73,7 +73,6 @@
       }
     }
   }
-
 }
 
 .sidebar.save {
@@ -89,6 +88,7 @@
 }
 
 html:not([dir="rtl"]) .sidebar {
+  background-color:#666568;
   margin-left: 0;
 }
 

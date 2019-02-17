@@ -1,4 +1,4 @@
-export const defaultStartPath = '/app/inbox';
+export const defaultStartPath = '/app/signup';
 
 export const subHiddenBreakpoint=1440;
 export const menuHiddenBreakpoint = 768;

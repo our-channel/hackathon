@@ -117,7 +117,7 @@ export default class Sidebar extends React.Component {
                                 {sub: isSub})
     return (
       <div className={navClasses}>
-        <div >
+        <div>
           <Nav vertical className="border flex-column" style={{
   position: 'sticky'}}>
 

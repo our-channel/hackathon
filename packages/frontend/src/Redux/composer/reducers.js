@@ -9,30 +9,6 @@ const INIT = {
   sendTxnHashes: []
 }
 
-const createIdRequest = (state=INIT) => {
-  return {
-    ...state,
-    loading: true,
-    error: null
-  }
-}
-
-const createIdSuccess = (state=INIT, action) => {
-  return {
-    ...state,
-    loading: false,
-    didAddress: action.didAddress
-  }
-}
-
-const createIdFail = (state=INIT, action) => {
-  return {
-    ...state,
-    loading: false,
-    erorr: action.error
-  }
-}
-
 const toggleModal = (state=INIT) => {
   return {
     ...state,
@@ -69,10 +45,6 @@ const sendFail = (state=INIT, action) => {
 }
 
 const HANDLERS = {
-  [Types.CREATE_ID_REQUEST]: createIdRequest,
-  [Types.CREATE_ID_SUCCESS]: createIdSuccess,
-  [Types.CREATE_ID_FAILURE]: createIdFail,
-
   [Types.TOGGLE_MODAL]: toggleModal,
   [Types.SEND_STARTED]: send,
   [Types.SEND_COMPLETED]: sendOk,

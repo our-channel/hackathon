@@ -1,0 +1,79 @@
+.signup-container{
+    background-color: theme-color("nav-bg-color");
+    width: auto;
+    height: 800px;
+    display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+}
+
+.logo-container{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button-container{
+    display:flex;
+    justify-content:center;
+    margin-top: 50px;
+}
+
+.signup-logo-text{
+    color: theme-color("nav-text");
+    display: inline-block;
+    font-size:65px;
+    padding-top: 10px;
+}
+
+.signup-logo-image{
+    margin-bottom: 40px;
+    margin-left: 30px;    
+}
+
+.input-container{
+    width:450px;
+    display:flex;
+    justify-content:center;
+}
+
+.username-input{ 
+    background-color: black;
+    color: theme-color("nav-text");
+}
+
+.username-input:focus{
+    background-color: black;
+    color: theme-color("nav-text");
+}
+
+.username-input-icon span{
+    color: theme-color("nav-text");
+    background-color: #666568;
+}
+
+.button{
+    color: theme-color("nav-text");
+    background-color: #666568;
+}
+
+.loading-image{
+    
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @keyframes spin { 
+        from { 
+            transform: rotate(0deg); 
+        } to { 
+            transform: rotate(360deg); 
+        }
+    }    
+}
+
+.image-container{
+    display:flex;
+    justify-content:center;
+}

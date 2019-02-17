@@ -17,9 +17,6 @@ import {
 } from 'reactstrap';
 
 class MainApp extends Component {
-  componentDidMount() {
-    this.props.init();
-  }
 
   render() {
     const { match } = this.props;
@@ -28,7 +25,6 @@ class MainApp extends Component {
       <div className="app-container container-fluid mr-0 ml-0 pr-0 pl-0">
         <Topbar />
         <Composer />
-
         <Row className="no-gutters w-100">
           <Col md="1" className="d-flex flex-column align-items-start">
             <Sidebar />

@@ -18031,6 +18031,74 @@ a.text-canvas-bg:hover, a.text-canvas-bg:focus {
   .top-nav .nav-bg {
     background-color: #330066; }
 
+.signup-container {
+  background-color: #330066;
+  width: auto;
+  height: 800px;
+  display: -webkit-flex;
+  /* Safari */
+  -webkit-align-items: center;
+  /* Safari 7.0+ */
+  display: flex;
+  align-items: center; }
+
+.logo-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px; }
+
+.signup-logo-text {
+  color: rgba(84, 255, 0, 0.9);
+  display: inline-block;
+  font-size: 65px;
+  padding-top: 10px; }
+
+.signup-logo-image {
+  margin-bottom: 40px;
+  margin-left: 30px; }
+
+.input-container {
+  width: 450px;
+  display: flex;
+  justify-content: center; }
+
+.username-input {
+  background-color: black;
+  color: rgba(84, 255, 0, 0.9); }
+
+.username-input:focus {
+  background-color: black;
+  color: rgba(84, 255, 0, 0.9); }
+
+.username-input-icon span {
+  color: rgba(84, 255, 0, 0.9);
+  background-color: #666568; }
+
+.button {
+  color: rgba(84, 255, 0, 0.9);
+  background-color: #666568; }
+
+.loading-image {
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
+.image-container {
+  display: flex;
+  justify-content: center; }
+
 .img-icon {
   height: 25px; }
 
@@ -18058,7 +18126,7 @@ a.text-canvas-bg:hover, a.text-canvas-bg:focus {
   .sidebar .nav-link {
     color: rgba(0, 0, 0, 0.9); }
   .sidebar .sidebar-backround-color {
-    background-color: #666568; }
+    background-color: #666568 !important; }
   .sidebar .sidebar-icon-color {
     color: rgba(84, 255, 0, 0.9); }
   .sidebar a {
@@ -18107,6 +18175,7 @@ a.text-canvas-bg:hover, a.text-canvas-bg:focus {
   left: 103px; }
 
 html:not([dir="rtl"]) .sidebar {
+  background-color: #666568;
   margin-left: 0; }
 
 .sidebar-sticky {
@@ -18164,6 +18233,12 @@ html:not([dir="rtl"]) .sidebar {
 
 .subject-text {
   color: #330066; }
+
+.inbox-item {
+  background-color: black; }
+
+.sender-address {
+  color: rgba(84, 255, 0, 0.9); }
 
 .w-40 {
   width: 40%; }

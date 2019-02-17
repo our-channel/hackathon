@@ -11,7 +11,7 @@ export const InboxHtml = ({ parent, messages }) => {
           ? messages.map((item, idx) => (
               <li
                 key={idx}
-                className="list-group-item list-group-item-action"
+                className="list-group-item list-group-item-action inbox-item"
               >
                   <div className="custom-control">
                       <label
@@ -20,6 +20,7 @@ export const InboxHtml = ({ parent, messages }) => {
                         <a
                           title="send mail"
                           href={"mailto:" + item.address}
+                          className="sender-address"
                         >
                           {item.address}{" "}
                           <span className="icon icon-envelope far fa-fw fa-envelope mr-md-1" />
