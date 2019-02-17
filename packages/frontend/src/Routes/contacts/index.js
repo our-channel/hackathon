@@ -16,8 +16,7 @@ const d2p = (dispatch,ownProps) => {
       let web3 = ownProps.web3;
       let addrs = await web3.getAccounts();
       let idFactory = ownProps.idFactory;
-      console.log("Address", addrs[0]);
-
+      
       return idFactory.createChannel(addrs[0])
               .then(r=>{
                 console.log("Create channel result", r);

@@ -16,8 +16,6 @@ const loadRequest = (state=INIT) => {
 }
 
 const loadSuccess = (state=INIT, action) => {
-  console.log('loadSuccess');
-  console.log(action)
   return {
     ...state,
     loading: false,

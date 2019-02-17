@@ -166,7 +166,6 @@ var messages = [
 ]
 
 const init = () => async dispatch => {
-  console.log("WTF");
   dispatch(Creators.loadRequest());
   console.log(messages);
   dispatch(Creators.loadSuccess(messages));

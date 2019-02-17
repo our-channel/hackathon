@@ -1,6 +1,16 @@
 import Message from 'Model/Message';
 import uuid from 'uuid/v4';
 import KeyManager from 'Services/KeyManager';
+import IdContract from 'Services/IDContractService';
+import MsgIO from 'Services/MessageIO';
+
+import _ from 'lodash';
+
+import {
+  RELAY_ADDRESS
+} from 'Constants/Addresses';
+
+import axios from 'axios';
 
 const DEF_POLL = 5000;
 
@@ -9,6 +19,9 @@ export default class ChannelMessageListener {
     this.contractAddress = props.contractAddress;
     this.pollPeriod = props.pollPeriod || DEF_POLL;
     this.dispatch = props.dispatch;
+    this.getState = props.getState;
+    this.retrieved = {};
+
     this.handler = props.handler;
 
     [
@@ -20,10 +33,11 @@ export default class ChannelMessageListener {
     });
   }
 
-  start() {
+  async start() {
     if(this.sched) {
       return;
     }
+    await this._doPoll();
     this.sched = setInterval(this._doPoll, this.pollPeriod);
   }
 
@@ -36,32 +50,38 @@ export default class ChannelMessageListener {
   }
 
   async _doPoll() {
-    // var events = await axios.post(
-    //   "https://api.thegraph.com/subgraphs/name/realdave/testevents",
-    //   {
-    //     query: "query($targetAddress: String!) { relayedMessages(targetAddress: $targetAddress) { id targetAddress sender ipfsAddress } }",
-    //     variables: { "targetAddress": this.contractAddress },
-    //   }
-    // );
 
-    //TODO: actually pull messages from graphQL or whatever endpoint
-    let msg = new Message({
-      id: uuid(),
-      sender: "Test Contact",
-      timestamp: Date.now(),
-      body: "Test Message",
-      read: false,
-      subject: "Test"
-    });
+     let state = this.getState();
+     let web3 = state.web3;
+     if(!web3.web3) {
+       return;
+     }
 
-    //TODO: the message will be an IPFS link so go grab it
+     var r = await axios.post(
+       "https://api.thegraph.com/subgraphs/name/realdave/testevents",
+       {
+         query: "query($targetAddress: String!) { relayedMessages(targetAddress: $targetAddress) { id targetAddress sender ipfsAddress } }",
+         variables: { "targetAddress": RELAY_ADDRESS },
+       }
+     );
 
-    //TODO: then decrypt the message with our key and the
-    /*
-    let km = KeyManager.instance;
-    let enc = km.encrypt(JSON.stringify(msg),km.publicEncryptionKey);
-    let dec = km.decrypt(enc, km.publicEncryptionKey);
-    */
-    await this.dispatch(this.handler(msg));
+     var events = _.get(r, "data.data.relayedMessages", []);
+     events.forEach(async evt=>{
+       if(this.retrieved[evt.id]) {
+         return;
+       }
+       this.retrieved[evt.id] = true;
+       let sender = evt.sender;
+       let idContract = new IdContract({
+         web3: web3.web3,
+         contractAddress: sender,
+         from: web3.account
+       });
+
+       let ipfsAddress = evt.ipfsAddress;
+       let msg = await MsgIO.instance.decodeIncoming(ipfsAddress, idContract);
+       await this.dispatch(this.handler(msg));
+
+     });
   }
 }

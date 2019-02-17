@@ -1,8 +1,6 @@
 import React from "react";
 
 export const InboxHtml = ({ parent }) => {
-  console.log('parent.state:')
-  console.log(parent.state)
   return (
 
     <div className="col-md py-3 tab-content">

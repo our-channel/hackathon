@@ -4,6 +4,57 @@ const ABI = [
 	{
 		"constant": true,
 		"inputs": [],
+		"name": "verificationInfo",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bytes"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "sender",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "ipfs_address",
+				"type": "string"
+			}
+		],
+		"name": "MessageReceived",
+		"type": "event"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "SetOwner",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
 		"name": "GetOwner",
 		"outputs": [
 			{
@@ -19,14 +70,28 @@ const ABI = [
 		"constant": false,
 		"inputs": [
 			{
-				"name": "_owner",
-				"type": "address"
+				"name": "_publicKey",
+				"type": "string"
 			}
 		],
-		"name": "SetOwner",
+		"name": "SetPublicKey",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetPublicKey",
+		"outputs": [
+			{
+				"name": "publicKey",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -98,20 +163,6 @@ const ABI = [
 	},
 	{
 		"constant": true,
-		"inputs": [],
-		"name": "verificationInfo",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bytes"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
 		"inputs": [
 			{
 				"name": "ipfsAddress",
@@ -140,29 +191,6 @@ const ABI = [
 		"payable": false,
 		"stateMutability": "pure",
 		"type": "function"
-	},
-	{
-		"inputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"name": "sender",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"name": "ipfs_address",
-				"type": "string"
-			}
-		],
-		"name": "MessageReceived",
-		"type": "event"
 	}
 ];
 

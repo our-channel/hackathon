@@ -23,9 +23,6 @@ export class ModalMessage extends React.Component {
   }
 
   render() {
-      console.log('render')
-      console.log(this.state)
-      console.log(this.props)
       return(
         <Modal isOpen={this.props.modal} toggle={this.props.toggle} className={this.props.className}>
             <ModalHeader toggle={this.props.toggle}>
