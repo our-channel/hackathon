@@ -22,7 +22,7 @@ const init = () => async (dispatch,getState) => {
   });
 
   if(state.signup.localAccounts.length === 0) {
-    dispatch(Creators.initSuccess(null, idFactory, userregistry))
+    dispatch(Creators.initSuccess(null, idFactory, userRegistry))
     return;
   }
 
